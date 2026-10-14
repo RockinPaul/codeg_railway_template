@@ -10,7 +10,7 @@ keeps your workspace across redeploys.
 
 | Service | Image | Public | Role |
 |---|---|---|---|
-| `codeg` | `xintaofei/codeg:0.30.7` | **yes** | The whole application: Rust server, web UI, SQLite on `/data`. |
+| `codeg` | `xintaofei/codeg:0.35.1` | **yes** | The whole application: Rust server, web UI, SQLite on `/data`. |
 
 One service, no gateway. Upstream publishes multi-arch images, so this template is a thin pin
 rather than a build, and codeg serves plain HTTP — which is exactly what Railway's edge expects.
@@ -60,6 +60,12 @@ compose file carries the same warning. Changing the pinned tag is the durable pa
   what you want; the declaration is inherited from upstream and is not removed here.
 - **The volume arrives root-owned with a `lost+found` directory.** codeg writes its database
   alongside it without complaint, so no entrypoint fix-up is needed — unusual, and verified.
+- **The dev-server port bridge (0.35+) does not reach the browser here.** codeg can show a dev
+  server an agent started (`localhost:3000` inside the container) through extra listeners on the
+  ten ports after `CODEG_PORT`, gated by a per-listener capability that only a token holder can
+  obtain. Railway routes only the service's one public port, so those listeners stay unreachable
+  from outside. The alternative, `CODEG_BRIDGE_HOST_PATTERN`, serves dev servers through codeg's own
+  port by hostname and needs a wildcard custom domain.
 - **`/` is the health check.** It returns 200 and serves the static shell before you authenticate;
   every `/api/*` route returns 401 without the token.
 

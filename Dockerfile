@@ -1,8 +1,8 @@
 # codeg — collaborative multi-agent AI coding workspace (https://github.com/xintaofei/codeg)
 #
 # Upstream publishes multi-arch images, so this is a thin pin rather than a build.
-# 0.30.7 index digest: sha256:8700beeaf1b16a9099b280fb76e297f3664fbe767aab0a1043c1d8d3084e3a3a
-ARG CODEG_VERSION=0.30.7
+# 0.35.1 index digest: sha256:b28d1bdcc30289c334d5f5bbd47d3b2f82982af48b20b0e30ab834023c9465de
+ARG CODEG_VERSION=0.35.1
 FROM xintaofei/codeg:${CODEG_VERSION}
 
 # Baked rather than set as service variables: template generation turns a literal
