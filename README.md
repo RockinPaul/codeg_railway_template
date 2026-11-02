@@ -10,7 +10,7 @@ keeps your workspace across redeploys.
 
 | Service | Image | Public | Role |
 |---|---|---|---|
-| `codeg` | `xintaofei/codeg:0.35.1` | **yes** | The whole application: Rust server, web UI, SQLite on `/data`. |
+| `codeg` | `xintaofei/codeg:0.41.3` | **yes** | The whole application: Rust server, web UI, SQLite on `/data`. |
 
 One service, no gateway. Upstream publishes multi-arch images, so this template is a thin pin
 rather than a build, and codeg serves plain HTTP — which is exactly what Railway's edge expects.
